@@ -20,7 +20,7 @@ export const ContextProvider = ({ children }) => {
   const [reviewData, setReviewData] = useState([{}]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/predict?for=us.zoom.videomeetings")
+    fetch("http://localhost:5000/predict?for=com.microsoft.teams")
       .then((res) => res.json())
       .then((reviewData) => {
         setReviewData(reviewData);
