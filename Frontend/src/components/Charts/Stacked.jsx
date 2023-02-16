@@ -34,17 +34,17 @@ const Stacked = ({ reviewData, width, height }) => {
 
   sentimentByMonth.map((item) => {
     if (forChart.includes(item[0])) {
-      if (item[1] == 1) {
+      if (item[1] === 1) {
         forChart[forChart.indexOf(item[0]) + 1] += 1;
       }
-      if (item[1] == 0) {
+      if (item[1] === 0) {
         forChart[forChart.indexOf(item[0]) + 2] += 1;
       }
     } else {
-      if (item[1] == 1) {
+      if (item[1] === 1) {
         forChart.push(item[0], 1, 0);
       }
-      if (item[1] == 0) {
+      if (item[1] === 0) {
         forChart.push(item[0], 0, 1);
       }
     }
