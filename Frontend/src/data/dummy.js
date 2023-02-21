@@ -67,12 +67,12 @@ export const links = [
         icon: <AiFillStar />,
       },
       {
-        name: "sentiment",
-        icon: <IoMdThumbsUp />,
-      },
-      {
         name: "compare",
         icon: <RiTableFill />,
+      },
+      {
+        name: "sentiment",
+        icon: <IoMdThumbsUp />,
       },
     ],
   },
@@ -311,9 +311,9 @@ export const RatingLineXAxis = {
 export const RatingLineYAxis = {
   labelFormat: "{value}",
   rangePadding: "None",
-  minimum: 2.0,
+  minimum: 0.0,
   maximum: 5.0,
-  interval: 0.3,
+  interval: 1.0,
   lineStyle: { width: 0 },
   majorTickLines: { width: 0 },
   minorTickLines: { width: 0 },
@@ -534,7 +534,7 @@ export const stackedPrimaryXAxis = {
 export const stackedPrimaryYAxis = {
   lineStyle: { width: 0 },
   minimum: 0,
-  maximum: 1200,
+  maximum: 600,
   interval: 100,
   majorTickLines: { width: 0 },
   majorGridLines: { width: 1 },
@@ -542,3 +542,16 @@ export const stackedPrimaryYAxis = {
   minorTickLines: { width: 0 },
   labelFormat: "{value}",
 };
+
+export const data = [
+  { text: "Hey", value: 1000 },
+  { text: "lol", value: 200 },
+  { text: "first impression", value: 800 },
+  { text: "very cool", value: 1000000 },
+  { text: "duck", value: 10 },
+  { text: "Hey", value: 1200 },
+  { text: "lol", value: 2000 },
+  { text: "first impression", value: 8000 },
+  { text: "very cool", value: 100000 },
+  { text: "duck", value: 100 },
+];

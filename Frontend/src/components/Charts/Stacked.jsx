@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ChartComponent,
   SeriesCollectionDirective,
@@ -10,18 +10,16 @@ import {
   Tooltip,
 } from "@syncfusion/ej2-react-charts";
 
-// import {
-//   stackedCustomSeries,
-//   stackedPrimaryXAxis,
-//   stackedPrimaryYAxis,
-// } from "../../data/dummy";
-import { useStateContext } from "../../contexts/ContextProvider";
+import {
+  stackedCustomSeries,
+  stackedPrimaryXAxis,
+  stackedPrimaryYAxis,
+} from "../../data/dummy";
 
 const Stacked = ({ reviewData, width, height }) => {
+  //count and format sentiment
   const sentimentByMonth = [];
-
   const arrayData = JSON.parse(reviewData);
-  console.log(arrayData);
   arrayData.map((review) => {
     const d = new Date(review["postedAt"]);
     const month = d.getMonth() + 1;
@@ -49,7 +47,6 @@ const Stacked = ({ reviewData, width, height }) => {
       }
     }
   });
-  console.log("dataForChart", forChart);
   const positiveData = [];
   const monthConvert = [
     1,
@@ -84,12 +81,13 @@ const Stacked = ({ reviewData, width, height }) => {
   }
 
   const negativeData = [];
-  for (var i = 0; i < forChart.length; i += 3) {
+  for (let i = 0; i < forChart.length; i += 3) {
     const x = forChart[i];
     const y = forChart[i + 2];
     negativeData.push({ x, y });
   }
 
+  //data for chart
   const stackedCustomSeries = [
     {
       dataSource: negativeData,
@@ -109,29 +107,6 @@ const Stacked = ({ reviewData, width, height }) => {
     },
   ];
 
-  const stackedPrimaryXAxis = {
-    majorGridLines: { width: 0 },
-    minorGridLines: { width: 0 },
-    majorTickLines: { width: 1 },
-    minorTickLines: { width: 1 },
-    interval: 0,
-    lineStyle: { width: 0 },
-    labelIntersectAction: "Rotate45",
-    valueType: "Category",
-  };
-  const stackedPrimaryYAxis = {
-    lineStyle: { width: 0 },
-    minimum: 0,
-    maximum: 600,
-    interval: 100,
-    majorTickLines: { width: 0 },
-    majorGridLines: { width: 1 },
-    minorGridLines: { width: 1 },
-    minorTickLines: { width: 0 },
-    labelFormat: "{value}",
-  };
-  console.log("positive: ", positiveData);
-  console.log("negative: ", negativeData);
   return (
     <ChartComponent
       id="charts"

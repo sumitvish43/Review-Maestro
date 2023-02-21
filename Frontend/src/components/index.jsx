@@ -9,3 +9,4 @@ export { default as LineChart } from "./Charts/LineChart";
 export { default as RatingChart } from "./Charts/RatingChart";
 export { default as Stacked } from "./Charts/Stacked";
 export { default as Header } from "./Header";
+export { default as ReviewListing } from "./ReviewListing";

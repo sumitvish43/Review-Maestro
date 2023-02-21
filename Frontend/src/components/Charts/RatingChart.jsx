@@ -16,7 +16,53 @@ import {
   RatingLineYAxis,
 } from "../../data/dummy";
 
-const RatingChart = ({ reviewData }) => {
+const RatingChart = ({ reviewData, setAvgRating, setNoOfRating }) => {
+  //average and format rating data
+  const ratingByMonth = [];
+  const arrayData = JSON.parse(reviewData);
+  arrayData.map((review) => {
+    const d = new Date(review["postedAt"]);
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+    const date = year + " " + month;
+    const rating = review["rating"];
+    ratingByMonth.push([date, rating]);
+  });
+
+  const forChart = [];
+  ratingByMonth.map((item) => {
+    if (forChart.includes(item[0])) {
+      forChart[forChart.indexOf(item[0]) + 1] += item[1];
+      forChart[forChart.indexOf(item[0]) + 2] += 1;
+    } else {
+      forChart.push(item[0], item[1], 1);
+    }
+  });
+
+  const lineChartData = [];
+  var sumOfAvgRating = 0;
+  for (var i = 0; i < forChart.length; i += 3) {
+    const x = forChart[i];
+    const y = forChart[i + 1] / forChart[i + 2];
+    sumOfAvgRating += y;
+    lineChartData.push({ x, y });
+  }
+  const avgRating = sumOfAvgRating / (forChart.length / 3);
+  setAvgRating(parseFloat(avgRating).toFixed(2));
+  setNoOfRating(arrayData.length);
+  //data for chart
+  const ratingSeries = [
+    {
+      dataSource: lineChartData,
+      xName: "x",
+      yName: "y",
+      name: "Avg Star Ratings",
+      width: "2",
+      marker: { visible: true, width: 10, height: 10 },
+      type: "Line",
+    },
+  ];
+
   return (
     <ChartComponent
       id="line-chart"
