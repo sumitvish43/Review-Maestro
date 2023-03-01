@@ -3,10 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const StateContext = createContext();
 
 const initialState = {
-  chat: false,
-  cart: false,
   userProfile: false,
-  notification: false,
 };
 
 export const ContextProvider = ({ children }) => {
@@ -18,15 +15,17 @@ export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
   const [reviewData, setReviewData] = useState([{}]);
+  const app = children.props.name;
+  const [appName, setAppName] = useState(app);
 
   useEffect(() => {
-    fetch("http://localhost:5000/predict?for=com.microsoft.teams")
+    fetch(`http://localhost:5000/predict?for=${children.props.id}`)
       .then((res) => res.json())
       .then((reviewData) => {
         setReviewData(reviewData);
         setLoading(false);
       });
-  }, []);
+  }, [appName]);
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -63,6 +62,8 @@ export const ContextProvider = ({ children }) => {
         setThemeSettings,
         reviewData,
         loading,
+        appName,
+        setAppName,
       }}
     >
       {children}

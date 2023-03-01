@@ -3,6 +3,20 @@ import StarRating from "@pluralsight/ps-design-system-starrating";
 
 const ReviewListing = ({ reviewData }) => {
   const arrayData = JSON.parse(reviewData);
+  const topic_names = [
+    "Aesthetics",
+    "Compatibility",
+    "Cost",
+    "Effectiveness",
+    "Efficiency",
+    "Enjoyability",
+    "General",
+    "Learnability",
+    "Reliability",
+    "Safety",
+    "Security",
+    "Usability",
+  ];
   return (
     <div className="">
       {arrayData.map((review) => (
@@ -36,6 +50,7 @@ const ReviewListing = ({ reviewData }) => {
                 </span>
               )}
             </p>
+            <p className="my-1">Topic: {topic_names[review["topics"]]}</p>
           </div>
         </div>
       ))}

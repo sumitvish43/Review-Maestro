@@ -1,3 +1,4 @@
+export { default as Search } from "./Search";
 export { default as Dashboard } from "./Dashboard";
 export { default as Topics } from "./Topics";
 export { default as Ratings } from "./Ratings";

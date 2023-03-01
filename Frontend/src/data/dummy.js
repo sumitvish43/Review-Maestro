@@ -10,9 +10,9 @@ import { BiColorFill } from "react-icons/bi";
 import { IoMdThumbsUp } from "react-icons/io";
 import { RiTableFill } from "react-icons/ri";
 // import avatar from "./avatar.jpg";
-import product1 from "./product1.jpg";
-import product2 from "./product2.jpg";
-import product3 from "./product3.jpg";
+import product1 from "./Microsoft Teams.jpg";
+import product2 from "./Google Meet.jpg";
+import product3 from "./Zoom Meetings.jpg";
 
 export const gridAppImage = (props) => (
   <div>

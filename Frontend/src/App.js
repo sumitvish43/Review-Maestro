@@ -12,12 +12,13 @@ import {
   Compare,
   Topics,
   Tags,
+  Search,
 } from "./pages";
 import "./App.css";
 
 import { useStateContext } from "./contexts/ContextProvider";
 
-const App = () => {
+const App = ({ name, id }) => {
   const {
     setCurrentColor,
     setCurrentMode,

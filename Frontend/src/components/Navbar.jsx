@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-
 import avatar from "../data/avatar.jpg";
 import { AppProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
@@ -33,6 +32,7 @@ const Navbar = () => {
     isClicked,
     setScreenSize,
     screenSize,
+    appName,
   } = useStateContext();
 
   useEffect(() => {
@@ -69,10 +69,10 @@ const Navbar = () => {
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick("appProfile")}
           >
-            <img className="rounded-full w-8 h-8" src={avatar} alt="app-icon" />
+            {/* <img className="rounded-full w-8 h-8" src={avatar} alt="app-icon" /> */}
             <p>
               <span className="text-gray-400 font-bold ml-1 text-14">
-                Microsoft Teams
+                {appName}
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
