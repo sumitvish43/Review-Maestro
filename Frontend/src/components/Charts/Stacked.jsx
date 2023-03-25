@@ -20,6 +20,7 @@ const Stacked = ({ reviewData, width, height }) => {
   //count and format sentiment
   const sentimentByMonth = [];
   const arrayData = JSON.parse(reviewData);
+
   arrayData.map((review) => {
     const d = new Date(review["postedAt"]);
     const month = d.getMonth() + 1;

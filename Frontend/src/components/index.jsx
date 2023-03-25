@@ -11,3 +11,5 @@ export { default as Stacked } from "./Charts/Stacked";
 export { default as Header } from "./Header";
 export { default as ReviewListing } from "./ReviewListing";
 export { default as ProgressBar } from "./Charts/ProgressBar";
+export { default as SentimentBreakdown } from "./SentimentBreakdown";
+export { default as StarBreakdown } from "./StarBreakdown";

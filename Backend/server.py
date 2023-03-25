@@ -43,7 +43,7 @@ def predict():
     df = fetch_data(app_name)
     # print(dataset)
     # print("\n\n\n")
-    sentiment_dataset = preprocess_data(df, 3000)
+    sentiment_dataset = preprocess_data(df,3000)
     topic_dataset = preprocess_data(df, 6999)
     
     sentiment_output = sentiment_model.predict(sentiment_dataset)
@@ -92,13 +92,13 @@ def predict():
 def fetch_data(appName):
     review, continuation_token = reviews(
         appName,  # 'us.zoom.videomeetings'
-        count=1000
+        count=700
     )
 
     for i in range(1, 10):
         result, continuation_token = reviews(
             appName,  # 'us.zoom.videomeetings'
-            count=1000,
+            count=700,
             # defaults to None(load from the beginning)
             continuation_token=continuation_token
         )

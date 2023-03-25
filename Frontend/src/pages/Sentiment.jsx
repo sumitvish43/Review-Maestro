@@ -3,17 +3,10 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { Header, Stacked } from "../components";
 import GaugeChart from "react-gauge-chart";
 import { Loader } from "../pages";
-import { ProgressBar } from "../components";
+import { SentimentBreakdown } from "../components";
 
 const Sentiment = () => {
   const { reviewData, loading, reviewCount } = useStateContext();
-
-  const getSentiment = () => {
-    const sentimentValues = [0, 0];
-    const arrayData = JSON.parse(reviewData);
-    arrayData.map((review) => (sentimentValues[review["sentiment"]] += 1));
-    return sentimentValues;
-  };
 
   const getSentimentPercent = () => {
     const arrayData = JSON.parse(reviewData);
@@ -55,13 +48,7 @@ const Sentiment = () => {
         </div>
         <div className="mt-20 w-5/12">
           <p>Sentiment Breakdown</p>
-          <ProgressBar
-            from="sentiment"
-            count={2}
-            bgcolor={["#39c38e", "#ff453c"]}
-            progress={getSentiment()}
-            height={13}
-          />
+          <SentimentBreakdown from="sentiment" />
         </div>
       </div>
     </div>

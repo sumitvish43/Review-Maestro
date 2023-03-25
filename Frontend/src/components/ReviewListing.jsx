@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import StarRating from "@pluralsight/ps-design-system-starrating";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const ReviewListing = ({ reviewData }) => {
   const arrayData = JSON.parse(reviewData);
+  const [items, setItems] = useState([]);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchData(page);
+    }, 500);
+  }, [page]);
+
+  const fetchData = (page) => {
+    const newItems = arrayData.slice(count, count + 10);
+    setCount(count + 10);
+    setItems([...items, ...newItems]);
+  };
+
+  const onScroll = () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage(page + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [items]);
+
   const topic_names = [
     "Aesthetics",
     "Compatibility",
@@ -17,9 +48,10 @@ const ReviewListing = ({ reviewData }) => {
     "Security",
     "Usability",
   ];
+
   return (
     <div className="">
-      {arrayData.map((review) => (
+      {items.map((review, index) => (
         <div
           key={review["review_id"]}
           className="flex flex-row my-5 rounded-md border-2 p-5"
@@ -55,6 +87,7 @@ const ReviewListing = ({ reviewData }) => {
         </div>
       ))}
     </div>
+    // <div key={index}>{item["authorName"]}</div>
   );
 };
 export default ReviewListing;
