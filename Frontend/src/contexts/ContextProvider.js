@@ -17,6 +17,8 @@ export const ContextProvider = ({ children }) => {
   const [reviewData, setReviewData] = useState([{}]);
   const app = children.props.name;
   const [appName, setAppName] = useState(app);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [topicMentions, setTopicMentions] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/predict?for=${children.props.id}`)
@@ -24,9 +26,30 @@ export const ContextProvider = ({ children }) => {
       .then((reviewData) => {
         setReviewData(reviewData);
         setLoading(false);
+        const arrayData = JSON.parse(reviewData);
+        setReviewCount(arrayData.length);
+        const tempArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        arrayData.map((review) => {
+          tempArray[review["topics"]] += 1;
+        });
+        setTopicMentions(tempArray);
       });
   }, [appName]);
 
+  const topic_names = [
+    "Aesthetics",
+    "Compatibility",
+    "Cost",
+    "Effectiveness",
+    "Efficiency",
+    "Enjoyability",
+    "General",
+    "Learnability",
+    "Reliability",
+    "Safety",
+    "Security",
+    "Usability",
+  ];
   const setMode = (e) => {
     setCurrentMode(e.target.value);
     localStorage.setItem("themeMode", e.target.value);
@@ -64,6 +87,9 @@ export const ContextProvider = ({ children }) => {
         loading,
         appName,
         setAppName,
+        topicMentions,
+        reviewCount,
+        setReviewCount,
       }}
     >
       {children}

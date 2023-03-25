@@ -4,7 +4,7 @@ import {
   AiFillDashboard,
   AiFillStar,
 } from "react-icons/ai";
-
+import { useStateContext } from "../contexts/ContextProvider";
 import { BsKanban } from "react-icons/bs";
 import { BiColorFill } from "react-icons/bi";
 import { IoMdThumbsUp } from "react-icons/io";
@@ -33,7 +33,19 @@ export const gridOrderStatus = (props) => (
     {props.Average}
   </button>
 );
-
+export const percentStatus = (props) => (
+  <button
+    type="button"
+    style={{ background: props.MentionpercentBg }}
+    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+  >
+    {props.Mentionpercent}
+  </button>
+);
+const GetMentions = (props) => {
+  const { topicMentions } = useStateContext();
+  return topicMentions[0];
+};
 export const LinePrimaryXAxis = {
   valueType: "DateTime",
   labelFormat: "y",
@@ -554,4 +566,36 @@ export const data = [
   { text: "first impression", value: 8000 },
   { text: "very cool", value: 100000 },
   { text: "duck", value: 100 },
+];
+
+export const topicGrid = [
+  {
+    field: "TopicName",
+    headerText: "TOPIC",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "Sentiment",
+    headerText: "SENTIMENT",
+    width: "150",
+    editType: "dropdownedit",
+    textAlign: "Center",
+  },
+
+  {
+    field: "Mentions",
+    headerText: "MENTIONS",
+    textAlign: "Center",
+    editType: "numericedit",
+
+    width: "150",
+  },
+  {
+    headerText: "MENTION %",
+    template: percentStatus,
+    field: "Mentionpercent",
+    textAlign: "Center",
+    width: "120",
+  },
 ];
