@@ -4,7 +4,10 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
-    "@pluralsight/ps-design-system-starrating": "^11.1.2",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
     "@syncfusion/ej2": "^19.4.48",
     "@syncfusion/ej2-react-charts": "^19.4.50",
     "@syncfusion/ej2-react-circulargauge": "^20.4.48",
@@ -15,13 +18,16 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
+    "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
     "react-gauge-chart": "^0.4.1",
     "react-icons": "^4.3.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
     "react-search-autocomplete": "^8.3.1",
+    "react-tooltip": "^5.10.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

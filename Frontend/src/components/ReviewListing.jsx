@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import StarRating from "@pluralsight/ps-design-system-starrating";
+// import StarRating from "@pluralsight/ps-design-system-starrating";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { AiFillStar } from "react-icons/ai";
 
 const ReviewListing = ({ reviewData }) => {
   const arrayData = JSON.parse(reviewData);
@@ -57,7 +58,13 @@ const ReviewListing = ({ reviewData }) => {
           className="flex flex-row my-5 rounded-md border-2 p-5"
         >
           <div className="basis-5/8 container mx-auto">
-            <StarRating className="mt-2" value={review["rating"]} />
+            <p className="flex">
+              {Array(review["rating"])
+                .fill()
+                .map((item, i) => {
+                  return <AiFillStar className="mt-0.5 text-gold text-xl" />;
+                })}
+            </p>
             {/^[a-z0-9]/i.test(review["review"]) ? (
               <p className="w-80">{String(review["review"])}</p>
             ) : (

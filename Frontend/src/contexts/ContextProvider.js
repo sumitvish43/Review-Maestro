@@ -19,6 +19,8 @@ export const ContextProvider = ({ children }) => {
   const [appName, setAppName] = useState(app);
   const [reviewCount, setReviewCount] = useState(0);
   const [topicMentions, setTopicMentions] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
+  const [lineChartData, setLineChartData] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:5000/predict?for=${children.props.id}`)
@@ -33,6 +35,40 @@ export const ContextProvider = ({ children }) => {
           tempArray[review["topics"]] += 1;
         });
         setTopicMentions(tempArray);
+
+        const ratingByMonth = [];
+        console.log(arrayData);
+        arrayData.map((review) => {
+          const d = new Date(review["postedAt"]);
+          const month = d.getMonth() + 1;
+          const year = d.getFullYear();
+          const date = year + " " + month;
+          const rating = review["rating"];
+          ratingByMonth.push([date, rating]);
+        });
+
+        const forChart = [];
+        ratingByMonth.map((item) => {
+          if (forChart.includes(item[0])) {
+            forChart[forChart.indexOf(item[0]) + 1] += item[1];
+            forChart[forChart.indexOf(item[0]) + 2] += 1;
+          } else {
+            forChart.push(item[0], item[1], 1);
+          }
+        });
+
+        const lineChartDataTemp = [];
+        var sumOfAvgRating = 0;
+        for (var i = 0; i < forChart.length; i += 3) {
+          const x = forChart[i];
+          const y = forChart[i + 1] / forChart[i + 2];
+          sumOfAvgRating += y;
+          lineChartDataTemp.push({ x, y });
+        }
+
+        setLineChartData(lineChartDataTemp);
+        const avgRating = sumOfAvgRating / (forChart.length / 3);
+        setAvgRating(Number(parseFloat(avgRating).toFixed(2)));
       });
   }, [appName]);
 
@@ -90,6 +126,8 @@ export const ContextProvider = ({ children }) => {
         topicMentions,
         reviewCount,
         setReviewCount,
+        avgRating,
+        lineChartData,
       }}
     >
       {children}

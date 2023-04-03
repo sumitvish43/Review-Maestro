@@ -24,7 +24,7 @@ const Sentiment = () => {
   ) : (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl border-2">
       <Header category="Sentiment Analysis" title="Timeline" />
-      <Stacked reviewData={reviewData} />
+      <Stacked reviewData={reviewData} reviewCount={reviewCount} />
       <div className="flex justify-around">
         <div>
           <div className="flex justify-center mt-10">
@@ -42,7 +42,7 @@ const Sentiment = () => {
           </div>
           <div className="flex justify-center">
             <p className="">
-              Sentiment Score is {getSentimentPercent() * 100}%
+              Sentiment Score is {(getSentimentPercent() * 100).toFixed(0)}%
             </p>
           </div>
         </div>

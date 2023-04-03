@@ -1,5 +1,4 @@
-# 2 improvements ->
-# Create a function for appending prediction(i.e topic/sentiment) and og data.
+
 # dont fetch review on every api call, instead find a way to fetch reviews only once.
 
 from emot.emo_unicode import EMOTICONS_EMO
@@ -27,7 +26,7 @@ app = Flask(__name__)
 CORS(app)
 # API Routes -----------------------------------------------------------------------------------------------------------------------
 
-sentiment_model = pickle.load(open('model.pkl', 'rb'))
+sentiment_model = pickle.load(open('sentiment_model.pkl', 'rb'))
 topic_model = pickle.load(open('topic_model.pkl', 'rb'))
 
 
@@ -88,27 +87,44 @@ def predict():
 
 # Utility Functions ------------------------------------------------------------------------------------------------------------------
 
+# OLD FETCH DATA
+# def fetch_data(appName):
+#     review, continuation_token = reviews(
+#         appName,  # 'us.zoom.videomeetings'
+#         count=700
+#     )
+
+#     for i in range(1, 10):
+#         result, continuation_token = reviews(
+#             appName,  # 'us.zoom.videomeetings'
+#             count=700,
+#             # defaults to None(load from the beginning)
+#             continuation_token=continuation_token
+#         )
+#     review.extend(result)
+#     reviews_dataset = pd.DataFrame(
+#         data=review).loc[:, ['reviewId', 'userName', 'content', 'score', 'at']]
+#     reviews_dataset.rename(columns={'reviewId': 'review_id', 'content': 'review',
+#                            'userName': 'authorName', 'at': 'postedAt', 'score': 'rating'}, inplace=True)
+#     return reviews_dataset
 
 def fetch_data(appName):
     review, continuation_token = reviews(
-        appName,  # 'us.zoom.videomeetings'
-        count=700
+    appName, #'us.zoom.videomeetings'
+    count = 2000,
+    sort=Sort.NEWEST
     )
 
-    for i in range(1, 10):
+    for i in range(1,10):
         result, continuation_token = reviews(
-            appName,  # 'us.zoom.videomeetings'
-            count=700,
-            # defaults to None(load from the beginning)
-            continuation_token=continuation_token
-        )
+        appName, #'us.zoom.videomeetings'
+        count = 2000,
+        continuation_token=continuation_token # defaults to None(load from the beginning)
+    )
     review.extend(result)
-    reviews_dataset = pd.DataFrame(
-        data=review).loc[:, ['reviewId', 'userName', 'content', 'score', 'at']]
-    reviews_dataset.rename(columns={'reviewId': 'review_id', 'content': 'review',
-                           'userName': 'authorName', 'at': 'postedAt', 'score': 'rating'}, inplace=True)
+    reviews_dataset = pd.DataFrame(data = review).loc[:, ['reviewId','userName','content','score','at']]
+    reviews_dataset.rename(columns = {'reviewId':'review_id','content':'review','userName':'authorName','at':'postedAt','score':'rating'}, inplace = True)
     return reviews_dataset
-
 # 'review_id','review','rating','sentiment'
 
 # preprocssing Utilities ------------------------------------------------------------------------------------------------------------------

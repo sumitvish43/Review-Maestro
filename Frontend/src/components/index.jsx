@@ -13,3 +13,4 @@ export { default as ReviewListing } from "./ReviewListing";
 export { default as ProgressBar } from "./Charts/ProgressBar";
 export { default as SentimentBreakdown } from "./SentimentBreakdown";
 export { default as StarBreakdown } from "./StarBreakdown";
+export { default as AvgStar } from "./AvgStar";

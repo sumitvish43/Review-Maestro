@@ -8,6 +8,9 @@ module.exports = {
       body: ["Open Sans", "sans-serif"],
     },
     extend: {
+      colors: {
+        gold: "#ffcc00",
+      },
       fontSize: {
         14: "14px",
       },

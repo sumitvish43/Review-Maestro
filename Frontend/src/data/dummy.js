@@ -555,19 +555,6 @@ export const stackedPrimaryYAxis = {
   labelFormat: "{value}",
 };
 
-export const data = [
-  { text: "Hey", value: 1000 },
-  { text: "lol", value: 200 },
-  { text: "first impression", value: 800 },
-  { text: "very cool", value: 1000000 },
-  { text: "duck", value: 10 },
-  { text: "Hey", value: 1200 },
-  { text: "lol", value: 2000 },
-  { text: "first impression", value: 8000 },
-  { text: "very cool", value: 100000 },
-  { text: "duck", value: 100 },
-];
-
 export const topicGrid = [
   {
     field: "TopicName",

@@ -10,13 +10,9 @@ import {
   Tooltip,
 } from "@syncfusion/ej2-react-charts";
 
-import {
-  stackedCustomSeries,
-  stackedPrimaryXAxis,
-  stackedPrimaryYAxis,
-} from "../../data/dummy";
+import { stackedPrimaryXAxis } from "../../data/dummy";
 
-const Stacked = ({ reviewData, width, height }) => {
+const Stacked = ({ reviewData, width, height, reviewCount }) => {
   //count and format sentiment
   const sentimentByMonth = [];
   const arrayData = JSON.parse(reviewData);
@@ -89,6 +85,18 @@ const Stacked = ({ reviewData, width, height }) => {
   }
 
   //data for chart
+  const stackedPrimaryYAxis = {
+    lineStyle: { width: 0 },
+    minimum: 0,
+    maximum: reviewCount,
+    interval: reviewCount / 5,
+    majorTickLines: { width: 0 },
+    majorGridLines: { width: 1 },
+    minorGridLines: { width: 1 },
+    minorTickLines: { width: 0 },
+    labelFormat: "{value}",
+  };
+
   const stackedCustomSeries = [
     {
       dataSource: negativeData,
