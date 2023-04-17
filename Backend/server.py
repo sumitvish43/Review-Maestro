@@ -32,7 +32,7 @@ topic_model = pickle.load(open('topic_model.pkl', 'rb'))
 
 @app.route('/')
 def hello_world():
-    return render_template("showdata.html")
+    return "Sever is Live and Ready to Serve"
 
 
 @app.route('/predict', methods=['POST', 'GET'])
