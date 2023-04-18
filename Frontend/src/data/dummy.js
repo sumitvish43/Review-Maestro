@@ -42,10 +42,7 @@ export const percentStatus = (props) => (
     {props.Mentionpercent}
   </button>
 );
-const GetMentions = (props) => {
-  const { topicMentions } = useStateContext();
-  return topicMentions[0];
-};
+
 export const LinePrimaryXAxis = {
   valueType: "DateTime",
   labelFormat: "y",
@@ -554,35 +551,3 @@ export const stackedPrimaryYAxis = {
   minorTickLines: { width: 0 },
   labelFormat: "{value}",
 };
-
-export const topicGrid = [
-  {
-    field: "TopicName",
-    headerText: "TOPIC",
-    width: "150",
-    textAlign: "Center",
-  },
-  {
-    field: "Sentiment",
-    headerText: "SENTIMENT",
-    width: "150",
-    editType: "dropdownedit",
-    textAlign: "Center",
-  },
-
-  {
-    field: "Mentions",
-    headerText: "MENTIONS",
-    textAlign: "Center",
-    editType: "numericedit",
-
-    width: "150",
-  },
-  {
-    headerText: "MENTION %",
-    template: percentStatus,
-    field: "Mentionpercent",
-    textAlign: "Center",
-    width: "120",
-  },
-];

@@ -1,8 +1,7 @@
 import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Header, Stacked } from "../components";
+import { Header, Stacked, Loader } from "../components";
 import GaugeChart from "react-gauge-chart";
-import { Loader } from "../pages";
 import { SentimentBreakdown } from "../components";
 
 const Sentiment = () => {

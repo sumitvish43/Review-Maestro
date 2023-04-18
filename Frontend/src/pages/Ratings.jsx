@@ -1,7 +1,6 @@
 import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import { AvgStar, Header, RatingChart } from "../components";
-import { Loader } from "../pages";
+import { AvgStar, Header, RatingChart, Loader } from "../components";
 
 const Ratings = () => {
   const { loading, reviewCount, avgRating } = useStateContext();

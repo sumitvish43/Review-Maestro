@@ -33,7 +33,7 @@ const Search = () => {
           <ReactSearchAutocomplete
             maxResults={5}
             items={apps}
-            fuseOptions={{ keys: ["name", "id"] }} // Search on both fields
+            fuseOptions={{ keys: ["name"] }} // Search on both fields
             resultStringKeyName="name" // String to display in the results
             onSelect={handleOnSelect}
             showIcon={false}

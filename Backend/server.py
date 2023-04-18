@@ -111,17 +111,17 @@ def predict():
 def fetch_data(appName):
     review, continuation_token = reviews(
     appName, #'us.zoom.videomeetings'
-    count = 2000,
+    count = 500,
     sort=Sort.NEWEST
     )
 
     for i in range(1,10):
         result, continuation_token = reviews(
         appName, #'us.zoom.videomeetings'
-        count = 2000,
+        count = 500,
         continuation_token=continuation_token # defaults to None(load from the beginning)
-    )
-    review.extend(result)
+        )
+        review.extend(result)
     reviews_dataset = pd.DataFrame(data = review).loc[:, ['reviewId','userName','content','score','at']]
     reviews_dataset.rename(columns = {'reviewId':'review_id','content':'review','userName':'authorName','at':'postedAt','score':'rating'}, inplace = True)
     return reviews_dataset

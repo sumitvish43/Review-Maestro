@@ -5,9 +5,9 @@ import {
   SentimentBreakdown,
   StarBreakdown,
   AvgStar,
+  Loader,
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Loader } from "../pages";
 import CountUp from "react-countup";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Tooltip as ReactTooltip } from "react-tooltip";

@@ -14,3 +14,5 @@ export { default as ProgressBar } from "./Charts/ProgressBar";
 export { default as SentimentBreakdown } from "./SentimentBreakdown";
 export { default as StarBreakdown } from "./StarBreakdown";
 export { default as AvgStar } from "./AvgStar";
+export { default as Loader } from "./Loader";
+export { default as LineDistribution } from "./Charts/LineDistribution";

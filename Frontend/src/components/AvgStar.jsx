@@ -1,7 +1,6 @@
 import { React } from "react";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const AvgStar = () => {
@@ -17,7 +16,7 @@ const AvgStar = () => {
       }}
     >
       {[...new Array(5)].map((arr, index) => {
-        const activeState = 3.8;
+        const activeState = avgRating;
         const showEmptyIcon = activeState === -1 || activeState < index + 1;
 
         const isActiveRating = activeState !== 1;

@@ -13,11 +13,10 @@ import {
   Edit,
   Inject,
 } from "@syncfusion/ej2-react-grids";
-import { LineChart } from "../components";
+import { LineChart, Loader } from "../components";
 import { appData, contextMenuItems, appGrid } from "../data/dummy";
 import { Header } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Loader } from "../pages";
 // import RatingChart from "../components/Charts/RatingChart";
 
 const Compare = () => {

@@ -6,4 +6,3 @@ export { default as Sentiment } from "./Sentiment";
 export { default as Compare } from "./Compare";
 export { default as Tags } from "./Tags";
 export { default as Words } from "./Words";
-export { default as Loader } from "./Loader";

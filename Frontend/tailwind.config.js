@@ -10,6 +10,8 @@ module.exports = {
     extend: {
       colors: {
         gold: "#ffcc00",
+        positiveColor: "#39c38e",
+        negativeColor: "#ff453c",
       },
       fontSize: {
         14: "14px",
