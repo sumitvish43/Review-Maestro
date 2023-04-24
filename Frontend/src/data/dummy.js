@@ -65,42 +65,41 @@ export const LinePrimaryYAxis = {
 
 export const links = [
   {
-    title: "Analysis",
-    links: [
-      {
-        name: "dashboard",
-        icon: <AiFillDashboard />,
-      },
-      {
-        name: "ratings",
-        icon: <AiFillStar />,
-      },
-      {
-        name: "compare",
-        icon: <RiTableFill />,
-      },
-      {
-        name: "sentiment",
-        icon: <IoMdThumbsUp />,
-      },
-    ],
+    name: "dashboard",
+    icon: <AiFillDashboard />,
   },
   {
-    title: "Groupings",
-    links: [
-      {
-        name: "words",
-        icon: <AiOutlineFileSearch />,
-      },
-      {
-        name: "topics",
-        icon: <BsKanban />,
-      },
-      {
-        name: "tags",
-        icon: <BiColorFill />,
-      },
-    ],
+    name: "Google Meet",
+    icon: <AiFillDashboard />,
+  },
+  {
+    name: "Microsoft Teams",
+    icon: <AiFillDashboard />,
+  },
+  {
+    name: "Zoom Meetings",
+    icon: <AiFillDashboard />,
+  },
+  {
+    name: "topics",
+    icon: <BsKanban />,
+  },
+
+  {
+    name: "compare",
+    icon: <RiTableFill />,
+  },
+  {
+    name: "sentiment",
+    icon: <IoMdThumbsUp />,
+  },
+  {
+    name: "rating trends",
+    icon: <AiFillStar />,
+  },
+  {
+    name: "intention",
+    icon: <BiColorFill />,
   },
 ];
 

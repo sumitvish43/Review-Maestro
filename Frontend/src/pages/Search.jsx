@@ -3,6 +3,9 @@ import { Route } from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import App from "../App";
 import { ContextProvider } from "../contexts/ContextProvider";
+import gmeet from "../data/Google Meet.jpg";
+import zoom from "../data/Zoom Meetings.jpg";
+import teams from "../data/Microsoft Teams.jpg";
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -19,8 +22,8 @@ const Search = () => {
     });
   }
   const handleOnSelect = (item) => {
-    setSearchInput(item.name);
-    setAppId(item.id);
+    setSearchInput(item.target.name);
+    setAppId(item.target.id);
   };
 
   return !searchInput.length ? (
@@ -30,6 +33,9 @@ const Search = () => {
       </p>
       <div className="flex justify-center mt-20">
         <div className="w-2/4">
+          {/* <img src={gmeet} alt="Gmeet" />
+          <img src={zoom} alt="Zoom" />
+          <img src={teams} alt="Teams" /> */}
           <ReactSearchAutocomplete
             maxResults={5}
             items={apps}
@@ -53,17 +59,38 @@ const Search = () => {
       </div>
       <div className="flex justify-center mt-20">
         <div className="flex justify-center items-center w-48 h-48 mx-12 bg-yellow-400 rounded-tl-xl rounded-br-xl">
-          <p className="font-bold text-white">Analyze</p>
+          <img
+            src={gmeet}
+            alt="Gmeet"
+            name="Google Meet"
+            id="com.google.android.apps.tachyon"
+            onClick={handleOnSelect}
+            style={{ cursor: "pointer" }}
+          />
         </div>
-        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-red-400 rounded-tr-xl rounded-bl-xl mt-12">
-          <p className="font-bold text-white">Compare</p>
+        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-red-400 rounded-tr-xl rounded-bl-xl">
+          <img
+            src={zoom}
+            alt="Zoom"
+            name="Zoom Meetings"
+            id="us.zoom.videomeetings"
+            onClick={handleOnSelect}
+            style={{ cursor: "pointer" }}
+          />
         </div>
-        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-green-400 rounded-tl-xl rounded-br-xl mt-12">
-          <p className="font-bold text-white">Predict</p>
+        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-green-400 rounded-tl-xl rounded-br-xl">
+          <img
+            src={teams}
+            alt="Teams"
+            name="Microsoft Teams"
+            id="com.microsoft.teams"
+            onClick={handleOnSelect}
+            style={{ cursor: "pointer" }}
+          />
         </div>
-        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-blue-400 rounded-tr-xl rounded-bl-xl">
+        {/* <div className="flex justify-center items-center w-48 h-48 mx-12 bg-blue-400 rounded-tr-xl rounded-bl-xl">
           <p className="font-bold text-white">Summarize</p>
-        </div>
+        </div> */}
       </div>
     </div>
   ) : (

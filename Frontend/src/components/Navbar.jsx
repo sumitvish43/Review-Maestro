@@ -63,24 +63,6 @@ const Navbar = () => {
         color={currentColor}
         icon={<AiOutlineMenu />}
       />
-      <div className="flex">
-        <TooltipComponent content="App selected" position="BottomCenter">
-          <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => handleClick("appProfile")}
-          >
-            {/* <img className="rounded-full w-8 h-8" src={avatar} alt="app-icon" /> */}
-            <p>
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                {appName}
-              </span>
-            </p>
-            <MdKeyboardArrowDown className="text-gray-400 text-14" />
-          </div>
-        </TooltipComponent>
-
-        {isClicked.appProfile && <AppProfile />}
-      </div>
     </div>
   );
 };
