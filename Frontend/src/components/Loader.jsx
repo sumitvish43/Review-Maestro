@@ -1,8 +1,8 @@
 import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import { ThreeCircles } from "react-loader-spinner";
+import { ThreeCircles, FallingLines } from "react-loader-spinner";
 
-const Loader = () => {
+const PageLoader = () => {
   const { currentColor } = useStateContext();
   return (
     <div className="h-full m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl flex justify-center">
@@ -21,4 +21,17 @@ const Loader = () => {
     </div>
   );
 };
-export default Loader;
+const LineLoading = () => {
+  const { currentColor } = useStateContext();
+  return (
+    <div className="h-full px-2 bg-white rounded-3xl flex justify-center">
+      <FallingLines
+        color={currentColor}
+        width="25"
+        visible={true}
+        ariaLabel="falling-lines-loading"
+      />
+    </div>
+  );
+};
+export { PageLoader, LineLoading };

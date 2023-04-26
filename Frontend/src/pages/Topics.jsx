@@ -1,93 +1,179 @@
-import React from "react";
-import { Header, Loader, LineDistribution } from "../components";
-import Box from "@mui/material/Box";
+import React, { useState, useRef } from "react";
+import {
+  Header,
+  PageLoader,
+  LineDistribution,
+  TopicReviews,
+} from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const Topics = () => {
-  const { topicMentions, loading, reviewCount, currentColor } =
-    useStateContext();
+  const ref = useRef(null);
 
+  const {
+    reviewData,
+    positiveOnTopic,
+    topicNames,
+    topicMentions,
+    loading,
+    reviewCount,
+    currentColor,
+  } = useStateContext();
+
+  const [topicToList, setTopicToList] = useState("");
+
+  const topicHandler = (e) => {
+    const element = document.getElementById("section-1");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setTopicToList(e.target.id);
+  };
+  var styleCursor = {};
   const topicData = [
     {
-      TopicName: "Aesthetic",
+      TopicName: topicNames[0],
       Mentions: topicMentions[0],
-      Sentiment: <LineDistribution />,
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[0]}
+          positives={positiveOnTopic[0]}
+        />
+      ),
       Mentionpercent: ((topicMentions[0] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Compatibility",
+      TopicName: topicNames[1],
       Mentions: topicMentions[1],
-      Sentiment: <LineDistribution />,
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[1]}
+          positives={positiveOnTopic[1]}
+        />
+      ),
       Mentionpercent: ((topicMentions[1] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Cost",
+      TopicName: topicNames[2],
       Mentions: topicMentions[2],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[2]}
+          positives={positiveOnTopic[2]}
+        />
+      ),
       Mentionpercent: ((topicMentions[2] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Effectiveness",
+      TopicName: topicNames[3],
       Mentions: topicMentions[3],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[3]}
+          positives={positiveOnTopic[3]}
+        />
+      ),
       Mentionpercent: ((topicMentions[3] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Efficiency",
+      TopicName: topicNames[4],
       Mentions: topicMentions[4],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[4]}
+          positives={positiveOnTopic[4]}
+        />
+      ),
       Mentionpercent: ((topicMentions[4] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Enjoyability",
+      TopicName: topicNames[5],
       Mentions: topicMentions[5],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[5]}
+          positives={positiveOnTopic[5]}
+        />
+      ),
       Mentionpercent: ((topicMentions[5] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "General",
+      TopicName: topicNames[6],
       Mentions: topicMentions[6],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[6]}
+          positives={positiveOnTopic[6]}
+        />
+      ),
       Mentionpercent: ((topicMentions[6] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Learnability",
+      TopicName: topicNames[7],
       Mentions: topicMentions[7],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[7]}
+          positives={positiveOnTopic[7]}
+        />
+      ),
       Mentionpercent: ((topicMentions[7] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Reliability",
+      TopicName: topicNames[8],
       Mentions: topicMentions[8],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[8]}
+          positives={positiveOnTopic[8]}
+        />
+      ),
       Mentionpercent: ((topicMentions[8] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Safety",
+      TopicName: topicNames[9],
       Mentions: topicMentions[9],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[9]}
+          positives={positiveOnTopic[9]}
+        />
+      ),
       Mentionpercent: ((topicMentions[9] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Security",
+      TopicName: topicNames[10],
       Mentions: topicMentions[10],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[10]}
+          positives={positiveOnTopic[10]}
+        />
+      ),
       Mentionpercent: ((topicMentions[10] / reviewCount) * 100).toFixed(2),
     },
     {
-      TopicName: "Usability",
+      TopicName: topicNames[11],
       Mentions: topicMentions[11],
-      Sentiment: "-",
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[11]}
+          positives={positiveOnTopic[11]}
+        />
+      ),
       Mentionpercent: ((topicMentions[11] / reviewCount) * 100).toFixed(2),
     },
   ];
 
   return loading ? (
-    <Loader />
+    <PageLoader />
   ) : (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="Extraction of topics" title="Topics" />
       <div className="">
+        <p className="text-slate-700 text-sm italic mb-2">
+          Click on any topic to see their reviews
+        </p>
         <table className="w-full text-sm text-center border-1">
           <thead className="text-sm text-gray-600 uppercase border-b">
             <th className="p-3">TOPIC</th>
@@ -96,9 +182,25 @@ const Topics = () => {
             <th className="p-3">MENTION %</th>
           </thead>
           {topicData.map((val, key) => {
+            topicMentions[topicNames.indexOf(val.TopicName)]
+              ? (styleCursor = {
+                  cursor: "pointer",
+                })
+              : (styleCursor = { cursor: "not-allowed" });
             return (
               <tr key={key} className="bg-white border-b text-sm">
-                <td className="p-3 ">{val.TopicName}</td>
+                <td
+                  className="p-3 flex justify-center"
+                  style={styleCursor}
+                  id={val.TopicName}
+                  onClick={topicHandler}
+                >
+                  {val.TopicName}
+                  {/* <span id="loader" style={{ display: "none" }}>
+                    <LineLoading />
+                  </span> */}
+                </td>
+
                 <td className="p-3">{val.Sentiment}</td>
                 <td className="p-3">{val.Mentions}</td>
                 <td className="m-3">
@@ -113,6 +215,9 @@ const Topics = () => {
             );
           })}
         </table>
+      </div>
+      <div id="section-1" className="mt-6">
+        <TopicReviews topic={topicToList} reviewData={reviewData} ref={ref} />
       </div>
     </div>
   );

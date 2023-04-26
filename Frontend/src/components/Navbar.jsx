@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import avatar from "../data/avatar.jpg";
-import { AppProfile } from ".";
 import { useStateContext } from "../contexts/ContextProvider";
+import gmeet from "../data/Google Meet.jpg";
+import zoom from "../data/Zoom Meetings.jpg";
+import teams from "../data/Microsoft Teams.jpg";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -28,13 +28,17 @@ const Navbar = () => {
     currentColor,
     activeMenu,
     setActiveMenu,
-    handleClick,
-    isClicked,
+    currentMode,
     setScreenSize,
     screenSize,
     appName,
   } = useStateContext();
 
+  const getAppIcon = () => {
+    if (appName === "Google Meet") return gmeet;
+    if (appName === "Zoom Meetings") return zoom;
+    if (appName === "Microsoft Teams") return teams;
+  };
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
 
@@ -63,6 +67,16 @@ const Navbar = () => {
         color={currentColor}
         icon={<AiOutlineMenu />}
       />
+      <div className="flex">
+        <img
+          className="rounded-full w-12 h-12"
+          src={getAppIcon()}
+          alt="App Icon"
+        />
+        <p className="mt-2 px-3 text-lg font-bold" style={{ color: "#888" }}>
+          {appName}
+        </p>
+      </div>
     </div>
   );
 };

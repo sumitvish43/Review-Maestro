@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-// import StarRating from "@pluralsight/ps-design-system-starrating";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { AiFillStar } from "react-icons/ai";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const ReviewListing = ({ reviewData }) => {
+  const { topicNames } = useStateContext(0);
   const arrayData = JSON.parse(reviewData);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     setTimeout(() => {
       fetchData(page);
@@ -34,21 +33,6 @@ const ReviewListing = ({ reviewData }) => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [items]);
-
-  const topic_names = [
-    "Aesthetics",
-    "Compatibility",
-    "Cost",
-    "Effectiveness",
-    "Efficiency",
-    "Enjoyability",
-    "General",
-    "Learnability",
-    "Reliability",
-    "Safety",
-    "Security",
-    "Usability",
-  ];
 
   return (
     <div className="">
@@ -89,12 +73,11 @@ const ReviewListing = ({ reviewData }) => {
                 </span>
               )}
             </p>
-            <p className="my-1">Topic: {topic_names[review["topics"]]}</p>
+            <p className="my-1">Topic: {topicNames[review["topics"]]}</p>
           </div>
         </div>
       ))}
     </div>
-    // <div key={index}>{item["authorName"]}</div>
   );
 };
 export default ReviewListing;

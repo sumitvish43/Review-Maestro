@@ -97,10 +97,10 @@ export const links = [
     name: "rating trends",
     icon: <AiFillStar />,
   },
-  {
-    name: "intention",
-    icon: <BiColorFill />,
-  },
+  // {
+  //   name: "intention",
+  //   icon: <BiColorFill />,
+  // },
 ];
 
 export const themeColors = [

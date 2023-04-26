@@ -1,12 +1,12 @@
 import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import { AvgStar, Header, RatingChart, Loader } from "../components";
+import { AvgStar, Header, RatingChart, PageLoader } from "../components";
 
 const Ratings = () => {
   const { loading, reviewCount, avgRating } = useStateContext();
 
   return loading ? (
-    <Loader />
+    <PageLoader />
   ) : (
     <>
       <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">

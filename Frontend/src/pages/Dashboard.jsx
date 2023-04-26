@@ -5,20 +5,48 @@ import {
   SentimentBreakdown,
   StarBreakdown,
   AvgStar,
-  Loader,
+  PageLoader,
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 import CountUp from "react-countup";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { PieChart } from "react-minimal-pie-chart";
+import { Chart } from "react-google-charts";
 
 const Dashboard = () => {
-  const { loading, reviewData, reviewCount, appName, avgRating } =
-    useStateContext();
+  const {
+    loading,
+    topicNames,
+    topicMentions,
+    reviewData,
+    reviewCount,
+    appName,
+    avgRating,
+  } = useStateContext();
+  const temp = [];
+  topicMentions.map((val) => {
+    temp.push(val);
+  });
+  temp
+    .sort(function (a, b) {
+      return a - b;
+    })
+    .reverse();
+  const mydata = [];
+  temp.slice(0, 5).map((num) => {
+    mydata.push([topicNames[topicMentions.indexOf(num)], num]);
+  });
+  mydata.unshift(["Topic", "No of mentions"]);
+
+  const options = {
+    legend: "none",
+    pieHole: 0.0,
+    is3D: false,
+  };
+
   return loading ? (
-    <Loader />
+    <PageLoader />
   ) : (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category={appName} title="Summary" />
@@ -36,19 +64,12 @@ const Dashboard = () => {
             place="bottom"
             content="Total number of reviews fetched"
           />
-          <PieChart
-            startAngle={30}
-            radius={40}
-            lineWidth={50}
-            onMouseOver={() => console.log("Value")}
-            segmentsShift={1}
-            data={[
-              { title: "Audio", value: 1313, color: "#FAA927" },
-              { title: "Design & UX", value: 1242, color: "#E64A18" },
-              { title: "Connectivity", value: 1149, color: "#1DBD9E" },
-              { title: "Bugs", value: 703, color: "#02ACC0" },
-              { title: "Sign Up & Login", value: 511, color: "#6F848F" },
-            ]}
+          <Chart
+            chartType="PieChart"
+            width="100%"
+            height="310px"
+            data={mydata}
+            options={options}
           />
         </div>
 

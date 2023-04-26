@@ -1,6 +1,6 @@
 import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import { Header, Stacked, Loader } from "../components";
+import { Header, Stacked, PageLoader } from "../components";
 import GaugeChart from "react-gauge-chart";
 import { SentimentBreakdown } from "../components";
 
@@ -19,7 +19,7 @@ const Sentiment = () => {
     width: 400,
   };
   return loading ? (
-    <Loader />
+    <PageLoader />
   ) : (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl border-2">
       <Header category="Sentiment Analysis" title="Timeline" />

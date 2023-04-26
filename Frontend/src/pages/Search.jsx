@@ -31,11 +31,8 @@ const Search = () => {
       <p className="text-7xl flex justify-center mt-28 font-crisis text-slate-600">
         Review Maestro
       </p>
-      <div className="flex justify-center mt-20">
+      {/*<div className="flex justify-center mt-20">
         <div className="w-2/4">
-          {/* <img src={gmeet} alt="Gmeet" />
-          <img src={zoom} alt="Zoom" />
-          <img src={teams} alt="Teams" /> */}
           <ReactSearchAutocomplete
             maxResults={5}
             items={apps}
@@ -56,9 +53,9 @@ const Search = () => {
             }}
           />
         </div>
-      </div>
+      </div>*/}
       <div className="flex justify-center mt-20">
-        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-yellow-400 rounded-tl-xl rounded-br-xl">
+        <div className="flex justify-center items-center w-48 h-48 mx-12 rounded-tl-xl rounded-br-xl">
           <img
             src={gmeet}
             alt="Gmeet"
@@ -68,7 +65,7 @@ const Search = () => {
             style={{ cursor: "pointer" }}
           />
         </div>
-        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-red-400 rounded-tr-xl rounded-bl-xl">
+        <div className="flex justify-center items-center pt-12 w-40 h-40 mx-12 rounded-tr-xl rounded-bl-xl">
           <img
             src={zoom}
             alt="Zoom"
@@ -78,7 +75,7 @@ const Search = () => {
             style={{ cursor: "pointer" }}
           />
         </div>
-        <div className="flex justify-center items-center w-48 h-48 mx-12 bg-green-400 rounded-tl-xl rounded-br-xl">
+        <div className="flex justify-center items-center w-48 h-48 mx-12 rounded-tl-xl rounded-br-xl">
           <img
             src={teams}
             alt="Teams"

@@ -19,6 +19,7 @@ export const ContextProvider = ({ children }) => {
   const [appName, setAppName] = useState(app);
   const [reviewCount, setReviewCount] = useState(0);
   const [topicMentions, setTopicMentions] = useState([]);
+  const [positiveOnTopic, setPositiveOnTopic] = useState([0]);
   const [avgRating, setAvgRating] = useState(0);
   const [lineChartData, setLineChartData] = useState([]);
 
@@ -31,13 +32,15 @@ export const ContextProvider = ({ children }) => {
         const arrayData = JSON.parse(reviewData);
         setReviewCount(arrayData.length);
         const tempArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        const tempTopicPositive = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         arrayData.map((review) => {
           tempArray[review["topics"]] += 1;
+          if (review["sentiment"] === 1)
+            tempTopicPositive[review["topics"]] += 1;
         });
         setTopicMentions(tempArray);
-
+        setPositiveOnTopic(tempTopicPositive);
         const ratingByMonth = [];
-        console.log(arrayData);
         arrayData.map((review) => {
           const d = new Date(review["postedAt"]);
           const month = d.getMonth() + 1;
@@ -72,19 +75,19 @@ export const ContextProvider = ({ children }) => {
       });
   }, [appName]);
 
-  const topic_names = [
-    "Aesthetics",
-    "Compatibility",
-    "Cost",
-    "Effectiveness",
-    "Efficiency",
-    "Enjoyability",
-    "General",
-    "Learnability",
-    "Reliability",
-    "Safety",
-    "Security",
-    "Usability",
+  const topicNames = [
+    "Design & UX",
+    "Bugs",
+    "Use Cases",
+    "Performance",
+    "Complexity",
+    "Connectivity",
+    "Sign Up & Login",
+    "Security & Accounts",
+    "Audio",
+    "Video",
+    "Customer Support",
+    "Update",
   ];
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -123,7 +126,9 @@ export const ContextProvider = ({ children }) => {
         loading,
         appName,
         setAppName,
+        topicNames,
         topicMentions,
+        positiveOnTopic,
         reviewCount,
         setReviewCount,
         avgRating,
