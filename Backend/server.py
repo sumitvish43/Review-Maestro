@@ -27,13 +27,13 @@ app = Flask(__name__)
 CORS(app)
 
 ##Loading Models
-sentiment_model = pickle.load(open('sentiment_model.pkl', 'rb'))
-topic_model = pickle.load(open('topic_model.pkl', 'rb'))
+sentiment_model = pickle.load(open('svm_sentiment_model.pkl', 'rb'))
+topic_model = pickle.load(open('svm-topic-extract-model.pkl', 'rb'))
 
 ##Global Variables
-google_meet = "Google Meet Reviews"
-ms_teams = "MS Teams Reviews"
-zoom = "Zoom Reviews"
+google_meet = "{}"
+ms_teams = "{}"
+zoom = "{}"
 
 
 # API Routes -----------------------------------------------------------------------------------------------------------------------
@@ -46,16 +46,15 @@ def hello_world():
 
 @app.route('/background-start')
 def background():
-    # t1 = threading.Thread(target=wrapper_gmeet)
-    # t2 = threading.Thread(target=wrapper_ms_teams)
-    # t3 = threading.Thread(target=wrapper_zoom)
+    t1 = threading.Thread(target=wrapper_gmeet)
+    t2 = threading.Thread(target=wrapper_ms_teams)
+    t3 = threading.Thread(target=wrapper_zoom)
 
-    # t1.start()
-    # t1.join()
-    # t2.start()
-    # t3.start()
-    thread = threading.Thread(target=daddy_wrapper)
-    thread.start()
+    t1.start()
+    t2.start()
+    t3.start()
+    # thread = threading.Thread(target=daddy_wrapper)
+    # thread.start()
     return "Analysis of Reviews of Google Meet, Zoom & MS Teams running in Background"
     
 
@@ -170,17 +169,17 @@ def summarize_app(appName):
 def fetch_data(appName):
     review, continuation_token = reviews(
     appName, #'us.zoom.videomeetings'
-    count = 2000,
+    count = 400,
     sort=Sort.NEWEST
     )
 
     for i in range(1,10):
         result, continuation_token = reviews(
         appName, #'us.zoom.videomeetings'
-        count = 2000,
+        count = 400,
         continuation_token=continuation_token # defaults to None(load from the beginning)
-    )
-    review.extend(result)
+        )
+        review.extend(result)
     reviews_dataset = pd.DataFrame(data = review).loc[:, ['reviewId','userName','content','score','at']]
     reviews_dataset.rename(columns = {'reviewId':'review_id','content':'review','userName':'authorName','at':'postedAt','score':'rating'}, inplace = True)
     return reviews_dataset

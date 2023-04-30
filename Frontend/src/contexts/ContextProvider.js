@@ -22,7 +22,19 @@ export const ContextProvider = ({ children }) => {
   const [avgRating, setAvgRating] = useState(0);
   const [lineChartData, setLineChartData] = useState([]);
 
+    var url;
+    function def(){
+      if(children.props.id === ""){
+        url = `http://localhost:5000/gmeet-data`;
+      }else if(children.props.id === "1"){
+        url = `http://localhost:5000/zoom-data`;
+      }else{
+        url = `http://localhost:5000/ms-teams-data`;
+      }
+    }
+  
   useEffect(() => {
+    // def();
     fetch(`http://localhost:5000/predict?for=${children.props.id}`)
       .then((res) => res.json())
       .then((reviewData) => {
@@ -73,18 +85,18 @@ export const ContextProvider = ({ children }) => {
   }, [appName]);
 
   const topic_names = [
-    "Aesthetics",
-    "Compatibility",
-    "Cost",
-    "Effectiveness",
-    "Efficiency",
+    "Use cases",
+    "Performance",
+    "Audio",
+    "Video",
+    "Feature Requests",
     "Enjoyability",
-    "General",
-    "Learnability",
-    "Reliability",
-    "Safety",
-    "Security",
-    "Usability",
+    "connectivity",
+    "Design & UX",
+    "Bugs",
+    "Security Accounts",
+    "Sign Up & Login",
+    "Update",
   ];
   const setMode = (e) => {
     setCurrentMode(e.target.value);
