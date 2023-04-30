@@ -46,42 +46,41 @@ const Sidebar = () => {
             </TooltipComponent>
           </div>
           <div className="mt-10 ">
-            {links.map((link, i) =>
-              link.name === appName ? (
-                <></>
-              ) : i < 4 && i > 0 ? (
-                <NavLink
-                  to={`/${link.name}`}
-                  key={link.name}
-                  onClick={handleCloseSideBar}
-                  style={({ isActive }) => ({
-                    backgroundColor: isActive ? currentColor : "",
-                  })}
-                  className={({ isActive }) =>
-                    isActive ? activeLink : normalLink
-                  }
-                >
-                  <div className="flex ml-10 text-sm">
-                    <span className="capitalize ">{link.name}</span>
-                  </div>
-                </NavLink>
-              ) : (
-                <NavLink
-                  to={`/${link.name}`}
-                  key={link.name}
-                  onClick={handleCloseSideBar}
-                  style={({ isActive }) => ({
-                    backgroundColor: isActive ? currentColor : "",
-                  })}
-                  className={({ isActive }) =>
-                    isActive ? activeLink : normalLink
-                  }
-                >
-                  {link.icon}
-                  <span className="capitalize ">{link.name}</span>
-                </NavLink>
-              )
-            )}
+            {links.map((link, i) => (
+              // link.name === appName ? (
+              //   <></>
+              // ) : i < 4 && i > 0 ? (
+              //   <NavLink
+              //     to={`/${link.name}`}
+              //     key={link.name}
+              //     onClick={handleCloseSideBar}
+              //     style={({ isActive }) => ({
+              //       backgroundColor: isActive ? currentColor : "",
+              //     })}
+              //     className={({ isActive }) =>
+              //       isActive ? activeLink : normalLink
+              //     }
+              //   >
+              //     <div className="flex ml-10 text-sm">
+              //       <span className="capitalize ">{link.name}</span>
+              //     </div>
+              //   </NavLink>
+              // ) :
+              <NavLink
+                to={`/${link.name}`}
+                key={link.name}
+                onClick={handleCloseSideBar}
+                style={({ isActive }) => ({
+                  backgroundColor: isActive ? currentColor : "",
+                })}
+                className={({ isActive }) =>
+                  isActive ? activeLink : normalLink
+                }
+              >
+                {link.icon}
+                <span className="capitalize ">{link.name}</span>
+              </NavLink>
+            ))}
           </div>
         </>
       )}

@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {
-  AiOutlineFileSearch,
-  AiFillDashboard,
-  AiFillStar,
-} from "react-icons/ai";
-import { useStateContext } from "../contexts/ContextProvider";
+import React from "react";
+import { AiFillDashboard, AiFillStar } from "react-icons/ai";
 import { BsKanban } from "react-icons/bs";
-import { BiColorFill } from "react-icons/bi";
 import { IoMdThumbsUp } from "react-icons/io";
 import { RiTableFill } from "react-icons/ri";
-// import avatar from "./avatar.jpg";
 import product1 from "./Microsoft Teams.jpg";
 import product2 from "./Google Meet.jpg";
 import product3 from "./Zoom Meetings.jpg";
@@ -69,18 +62,6 @@ export const links = [
     icon: <AiFillDashboard />,
   },
   {
-    name: "Google Meet",
-    icon: <AiFillDashboard />,
-  },
-  {
-    name: "Microsoft Teams",
-    icon: <AiFillDashboard />,
-  },
-  {
-    name: "Zoom Meetings",
-    icon: <AiFillDashboard />,
-  },
-  {
     name: "topics",
     icon: <BsKanban />,
   },
@@ -97,10 +78,6 @@ export const links = [
     name: "rating trends",
     icon: <AiFillStar />,
   },
-  // {
-  //   name: "intention",
-  //   icon: <BiColorFill />,
-  // },
 ];
 
 export const themeColors = [

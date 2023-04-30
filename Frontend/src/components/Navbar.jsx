@@ -28,10 +28,10 @@ const Navbar = () => {
     currentColor,
     activeMenu,
     setActiveMenu,
-    currentMode,
     setScreenSize,
     screenSize,
     appName,
+    setAppName,
   } = useStateContext();
 
   const getAppIcon = () => {
@@ -39,13 +39,34 @@ const Navbar = () => {
     if (appName === "Zoom Meetings") return zoom;
     if (appName === "Microsoft Teams") return teams;
   };
+  const getOtherAppIcon1 = () => {
+    if (appName === "Google Meet") return zoom;
+    if (appName === "Zoom Meetings") return gmeet;
+    if (appName === "Microsoft Teams") return gmeet;
+  };
+  const getOtherAppIcon2 = () => {
+    if (appName === "Google Meet") return teams;
+    if (appName === "Zoom Meetings") return teams;
+    if (appName === "Microsoft Teams") return zoom;
+  };
+  const appClickHandler = (e) => {
+    setAppName(e.target.id);
+  };
+
+  const getAppName1 = () => {
+    if (appName === "Google Meet") return "Zoom Meetings";
+    if (appName === "Zoom Meetings") return "Google Meet";
+    if (appName === "Microsoft Teams") return "Google Meet";
+  };
+  const getAppName2 = () => {
+    if (appName === "Google Meet") return "Microsoft Teams";
+    if (appName === "Zoom Meetings") return "Microsoft Teams";
+    if (appName === "Microsoft Teams") return "Zoom Meetings";
+  };
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
-
     window.addEventListener("resize", handleResize);
-
     handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -67,15 +88,36 @@ const Navbar = () => {
         color={currentColor}
         icon={<AiOutlineMenu />}
       />
+
       <div className="flex">
-        <img
-          className="rounded-full w-12 h-12"
-          src={getAppIcon()}
-          alt="App Icon"
-        />
-        <p className="mt-2 px-3 text-lg font-bold" style={{ color: "#888" }}>
-          {appName}
-        </p>
+        <div className="mx-2 cursor-pointer" onClick={appClickHandler}>
+          <img
+            className="rounded-full w-12 h-12"
+            src={getOtherAppIcon1()}
+            alt="App Icon"
+            id={getAppName1()}
+          />
+        </div>
+
+        <div className="mx-2" onClick={appClickHandler}>
+          <img
+            className="rounded-full w-12 h-12 cursor-pointer"
+            src={getOtherAppIcon2()}
+            alt="App Icon"
+            id={getAppName2()}
+          />
+        </div>
+
+        <div className="flex ml-8" id="active">
+          <img
+            className="rounded-full w-12 h-12"
+            src={getAppIcon()}
+            alt="App Icon"
+          />
+          <p className="mt-2 px-3 text-lg font-bold" style={{ color: "#888" }}>
+            {appName}
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -12,6 +12,9 @@ module.exports = {
         gold: "#ffcc00",
         positiveColor: "#39c38e",
         negativeColor: "#ff453c",
+        gmeet: "#02AC49",
+        zoom: "#1B97F3",
+        teams: "#5059C9",
       },
       fontSize: {
         14: "14px",

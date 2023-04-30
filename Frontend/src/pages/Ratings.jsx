@@ -20,7 +20,7 @@ const Ratings = () => {
           </div>
           <div className="grow h-14">
             <p className="my-4">Avg Stars</p>
-            <AvgStar />
+            <AvgStar avgRating={avgRating} />
             <p className="text-sm">{avgRating} Stars</p>
           </div>
         </div>

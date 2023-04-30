@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.css";
+import "./pages";
 import App from "./App";
-import Search from "./pages/Search";
-
+fetch(`http://localhost:5000/background-start`).then((res) => {
+  console.log("response", res);
+});
 ReactDOM.render(
   <React.StrictMode>
-    <Search />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

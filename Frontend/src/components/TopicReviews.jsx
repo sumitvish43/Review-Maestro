@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 import { AiFillNotification, AiFillStar } from "react-icons/ai";
 
@@ -40,7 +40,9 @@ const ReviewListing = ({ topic, reviewData }) => {
                 {/^[a-z0-9]/i.test(review["review"]) ? (
                   <p className="w-80">{String(review["review"])}</p>
                 ) : (
-                  <p className="w-80">Different language</p>
+                  <p className="w-80 italic text-xs">
+                    ~This review is not in English language~
+                  </p>
                 )}
               </div>
               <div className="basis-3/4">

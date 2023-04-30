@@ -18,3 +18,6 @@ export { PageLoader } from "./Loader";
 export { LineLoading } from "./Loader";
 export { default as LineDistribution } from "./Charts/LineDistribution";
 export { default as TopicReviews } from "./TopicReviews";
+export { default as CompareTable } from "./CompareTable";
+export { default as TopicBreakdown } from "./TopicBreakdown";
+export { default as ThreePies } from "./Charts/ThreePies";

@@ -17,6 +17,7 @@ from flask_cors import CORS
 import re
 import nltk
 # Check whether this download command works or not else need to download manually
+import threading
 nltk.download('stopwords')
 # nltk.download('wordnet')
 # This is stemming
@@ -29,10 +30,39 @@ CORS(app)
 sentiment_model = pickle.load(open('sentiment_model.pkl', 'rb'))
 topic_model = pickle.load(open('topic_model.pkl', 'rb'))
 
+##Global vars
+google_meet= "{}"
+ms_teams = "{}"
+zoom = "{}"
 
 @app.route('/')
 def hello_world():
     return render_template("showdata.html")
+
+@app.route('/background-start')
+def background():
+    t1 = threading.Thread(target=wrapper_gmeet)
+    t2 = threading.Thread(target=wrapper_ms_teams)
+    t3 = threading.Thread(target=wrapper_zoom)
+
+    t1.start()
+    t2.start()
+    t3.start()
+    # thread = threading.Thread(target=daddy_wrapper)
+    # thread.start()
+    return "Analysis of Reviews of Google Meet, Zoom & MS Teams running in Background"
+
+@app.route('/gmeet-data')
+def gmeetData():
+    return jsonify(google_meet.to_json(orient='records'))  
+
+@app.route('/ms-teams-data')
+def msTeamsData():
+    return jsonify(ms_teams.to_json(orient='records'))
+
+@app.route('/zoom-data')
+def zoomData():
+    return jsonify(zoom.to_json(orient='records'))      
 
 
 @app.route('/predict', methods=['POST', 'GET'])
@@ -62,22 +92,6 @@ def predict():
 # 0 --> Negative
 
 
-# @app.route('/classify-topics', methods=['POST', 'GET'])
-# def classify_topics():
-#     # print(request.form)
-#     app_name = request.args.get('for')
-#     df = fetch_data(app_name)
-#     # print(dataset)
-#     # print("\n\n\n")
-#     dataset = preprocess_data(df, 6999)
-#     output = topic_model.predict(dataset)
-#     # appending prediction(i.e topic/sentiment) and og data.
-#     y_df = pd.DataFrame(output, columns=['topics'])
-#     res = pd.concat([df, y_df], axis=1)
-#     return jsonify(res.to_json(orient='records'))
-#     # return output
-#     # response
-
 
 # mapping of idx to topic | 1st element is 0
 '''['aesthetics' 'compatibility' 'cost' 'effectiveness' 'efficiency'
@@ -86,39 +100,55 @@ def predict():
 # mapping of idx to topic |
 
 # Utility Functions ------------------------------------------------------------------------------------------------------------------
+#For Reference created this functions
+def daddy_wrapper():
+    wrapper_gmeet()
+    wrapper_ms_teams()
+    wrapper_zoom()
 
-# OLD FETCH DATA
-# def fetch_data(appName):
-#     review, continuation_token = reviews(
-#         appName,  # 'us.zoom.videomeetings'
-#         count=700
-#     )
+def wrapper_gmeet():
+    appName = "com.google.android.apps.tachyon"
+    global google_meet
+    google_meet = summarize_app(appName)
+    print("Analysis of Gmeet Done")
 
-#     for i in range(1, 10):
-#         result, continuation_token = reviews(
-#             appName,  # 'us.zoom.videomeetings'
-#             count=700,
-#             # defaults to None(load from the beginning)
-#             continuation_token=continuation_token
-#         )
-#     review.extend(result)
-#     reviews_dataset = pd.DataFrame(
-#         data=review).loc[:, ['reviewId', 'userName', 'content', 'score', 'at']]
-#     reviews_dataset.rename(columns={'reviewId': 'review_id', 'content': 'review',
-#                            'userName': 'authorName', 'at': 'postedAt', 'score': 'rating'}, inplace=True)
-#     return reviews_dataset
+def wrapper_ms_teams():
+    appName = "com.microsoft.teams"
+    global ms_teams
+    ms_teams = summarize_app(appName)
+    print("Analysis of MS Teams Done")
+
+def wrapper_zoom():
+    appName = "us.zoom.videomeetings"
+    global zoom
+    zoom = summarize_app(appName)
+    print("Analysis of Zoom Done")
+
+def summarize_app(appName):
+    df = fetch_data(appName)
+    sentiment_preprocess = preprocess_data(df, 3000)
+    topic_preprocess = preprocess_data(df, 6999)
+
+    sentiment_op =sentiment_model.predict(sentiment_preprocess)
+    topic_op = topic_model.predict(topic_preprocess)
+
+    y1_df = pd.DataFrame(sentiment_op, columns=['sentiment'])
+    res = pd.concat([df, y1_df], axis=1)
+    y2_df = pd.DataFrame(topic_op, columns=['topics'])
+    res = pd.concat([res, y2_df], axis=1)
+    return res
 
 def fetch_data(appName):
     review, continuation_token = reviews(
     appName, #'us.zoom.videomeetings'
-    count = 500,
+    count = 312,
     sort=Sort.NEWEST
     )
 
     for i in range(1,10):
         result, continuation_token = reviews(
         appName, #'us.zoom.videomeetings'
-        count = 500,
+        count = 312,
         continuation_token=continuation_token # defaults to None(load from the beginning)
         )
         review.extend(result)

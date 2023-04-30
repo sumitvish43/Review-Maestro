@@ -19,7 +19,6 @@ const Dashboard = () => {
     loading,
     topicNames,
     topicMentions,
-    reviewData,
     reviewCount,
     appName,
     avgRating,
@@ -97,7 +96,7 @@ const Dashboard = () => {
                 </p>
               </div>
             </div>
-            <AvgStar />
+            <AvgStar avgRating={avgRating} />
             <p className="text-sm text-slate-500">{avgRating} Stars</p>
           </div>
         </div>
@@ -139,7 +138,9 @@ const Dashboard = () => {
       <p className="mt-8 text-2xl font-extrabold tracking-tight text-slate-900">
         Review Listings{" "}
       </p>
-      <ReviewListing reviewData={reviewData} />
+      <div>
+        <ReviewListing />
+      </div>
     </div>
   );
 };

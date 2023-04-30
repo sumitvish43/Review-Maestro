@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
-const LineDistribution = ({ total, positives }) => {
+const LineDistribution = ({ total, positives, key }) => {
   const Parentdiv = {
     height: `6px`,
     width: "75%",
@@ -10,7 +10,7 @@ const LineDistribution = ({ total, positives }) => {
     marginLeft: 28,
   };
   return total ? (
-    <div style={Parentdiv} className="flex ml-12">
+    <div style={Parentdiv} className="flex ml-12 bottom-2.5 relative">
       <div
         style={{
           backgroundColor: "#39c38e",
@@ -27,7 +27,7 @@ const LineDistribution = ({ total, positives }) => {
           content={`${positives} (${((positives / total) * 100).toFixed(2)}%)`}
         />
         <ReactTooltip
-          anchorId={`negative-tooltip-${positives}`}
+          anchorId={`negative-tooltip-${total - positives}`}
           place="bottom"
           content={`${total - positives} (${(
             ((total - positives) / total) *
@@ -45,7 +45,7 @@ const LineDistribution = ({ total, positives }) => {
           height: "100%",
           cursor: "pointer",
         }}
-        id={`negative-tooltip-${positives}`}
+        id={`negative-tooltip-${total - positives}`}
       >
         <span></span>
       </div>
@@ -60,6 +60,7 @@ const LineDistribution = ({ total, positives }) => {
         marginTop: 20,
         marginLeft: 28,
       }}
+      className="bottom-2.5 relative"
     >
       <span></span>
     </div>

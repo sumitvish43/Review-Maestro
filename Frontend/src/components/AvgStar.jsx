@@ -3,8 +3,7 @@ import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 import { useStateContext } from "../contexts/ContextProvider";
 
-const AvgStar = () => {
-  const { avgRating } = useStateContext();
+const AvgStar = ({ avgRating }) => {
   return (
     <Box
       sx={{

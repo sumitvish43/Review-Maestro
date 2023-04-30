@@ -14,17 +14,50 @@ export const ContextProvider = ({ children }) => {
   const [themeSettings, setThemeSettings] = useState(false);
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
+
   const [reviewData, setReviewData] = useState([{}]);
   const app = children.props.name;
   const [appName, setAppName] = useState(app);
   const [reviewCount, setReviewCount] = useState(0);
+
   const [topicMentions, setTopicMentions] = useState([]);
   const [positiveOnTopic, setPositiveOnTopic] = useState([0]);
   const [avgRating, setAvgRating] = useState(0);
   const [lineChartData, setLineChartData] = useState([]);
+  const [gmeetData, setGmeetData] = useState([{}]);
+  const [zoomData, setZoomData] = useState([{}]);
+  const [teamsData, setTeamsData] = useState([{}]);
+
+  const loadAllData = () => {
+    fetch(`http://localhost:5000/ms-teams-data`)
+      .then((res) => res.json())
+      .then((reviewData) => {
+        setTeamsData(reviewData);
+        if (appName === "Microsoft Teams") setReviewData(reviewData);
+      });
+    fetch(`http://localhost:5000/zoom-data`)
+      .then((res) => res.json())
+      .then((reviewData) => {
+        setZoomData(reviewData);
+        if (appName === "Zoom Meetings") setReviewData(reviewData);
+      });
+    fetch(`http://localhost:5000/gmeet-data`)
+      .then((res) => res.json())
+      .then((reviewData) => {
+        setGmeetData(reviewData);
+        if (appName === "Google Meet") setReviewData(reviewData);
+      });
+  };
+  if (loading) loadAllData();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/predict?for=${children.props.id}`)
+    var url = "";
+    if (appName === "Microsoft Teams")
+      url = `http://localhost:5000/ms-teams-data`;
+    if (appName === "Google Meet") url = `http://localhost:5000/gmeet-data`;
+    if (appName === "Zoom Meetings") url = `http://localhost:5000/zoom-data`;
+
+    fetch(url)
       .then((res) => res.json())
       .then((reviewData) => {
         setReviewData(reviewData);
@@ -76,18 +109,17 @@ export const ContextProvider = ({ children }) => {
   }, [appName]);
 
   const topicNames = [
-    "Design & UX",
-    "Bugs",
-    "Use Cases",
-    "Performance",
-    "Complexity",
-    "Connectivity",
-    "Sign Up & Login",
-    "Security & Accounts",
     "Audio",
-    "Video",
-    "Customer Support",
+    "Bugs",
+    "Design & UX",
+    "Feature Requests",
+    "Performance", //
+    "Security & Accounts",
+    "Sign Up & Login",
     "Update",
+    "Use cases",
+    "Video",
+    "Connectivity",
   ];
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -124,6 +156,7 @@ export const ContextProvider = ({ children }) => {
         setThemeSettings,
         reviewData,
         loading,
+        setLoading,
         appName,
         setAppName,
         topicNames,
@@ -133,6 +166,9 @@ export const ContextProvider = ({ children }) => {
         setReviewCount,
         avgRating,
         lineChartData,
+        gmeetData,
+        zoomData,
+        teamsData,
       }}
     >
       {children}

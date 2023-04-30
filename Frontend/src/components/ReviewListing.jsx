@@ -2,19 +2,33 @@ import React, { useState, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useStateContext } from "../contexts/ContextProvider";
 
-const ReviewListing = ({ reviewData }) => {
-  const { topicNames } = useStateContext(0);
-  const arrayData = JSON.parse(reviewData);
+const ReviewListing = () => {
+  const { appName, topicNames, reviewData, gmeetData, zoomData, teamsData } =
+    useStateContext(0);
+  const [currentData, setCurrentData] = useState(reviewData);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
+  const [appChange, setAppChange] = useState(true);
+
   useEffect(() => {
     setTimeout(() => {
       fetchData(page);
     }, 500);
   }, [page]);
 
+  useEffect(() => {
+    appChange ? setAppChange(false) : setAppChange(true);
+    if (appName === "Microsoft Teams") setCurrentData(teamsData);
+    if (appName === "Zoom Meetings") setCurrentData(zoomData);
+    if (appName === "Google Meet") setCurrentData(gmeetData);
+    setCount(0);
+    setPage(1);
+    fetchData(page);
+  }, [appName]);
+
   const fetchData = (page) => {
+    const arrayData = JSON.parse(currentData);
     const newItems = arrayData.slice(count, count + 10);
     setCount(count + 10);
     setItems([...items, ...newItems]);
@@ -52,7 +66,9 @@ const ReviewListing = ({ reviewData }) => {
             {/^[a-z0-9]/i.test(review["review"]) ? (
               <p className="w-80">{String(review["review"])}</p>
             ) : (
-              <p className="w-80">Different language</p>
+              <p className="w-80 italic text-xs">
+                ~This review is not in English language~
+              </p>
             )}
           </div>
           <div className="basis-3/4">

@@ -1,6 +1,6 @@
 import React from "react";
 import { useStateContext } from "../contexts/ContextProvider";
-import { ThreeCircles, FallingLines } from "react-loader-spinner";
+import { ThreeCircles, Puff } from "react-loader-spinner";
 
 const PageLoader = () => {
   const { currentColor } = useStateContext();
@@ -22,15 +22,23 @@ const PageLoader = () => {
   );
 };
 const LineLoading = () => {
-  const { currentColor } = useStateContext();
   return (
-    <div className="h-full px-2 bg-white rounded-3xl flex justify-center">
-      <FallingLines
-        color={currentColor}
-        width="25"
-        visible={true}
-        ariaLabel="falling-lines-loading"
-      />
+    <div>
+      <div className="h-5/12 px-2 flex justify-center mt-64">
+        <Puff
+          height="90"
+          width="90"
+          radius={1}
+          color="white"
+          ariaLabel="puff-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+      <p className="flex justify-center text-sm mt-12 text-white center">
+        This will take a few minutes (estimated time 4 minutes..)
+      </p>
     </div>
   );
 };

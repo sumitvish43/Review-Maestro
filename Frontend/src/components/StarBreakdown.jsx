@@ -34,7 +34,12 @@ const StarBreakdown = () => {
           <p className="flex">
             <AiFillStar className="mt-0.5  text-slate-400" />5
           </p>
-          <p className="font-bold">{starsCount[4]}</p>
+          <div className="flex">
+            <p className="mr-1">{starsCount[4]}</p>
+            <p className="font-bold">
+              ({((starsCount[4] * 100) / reviewCount).toFixed(2)} %)
+            </p>
+          </div>
         </div>
       </div>
 
@@ -53,7 +58,12 @@ const StarBreakdown = () => {
           <p className="flex">
             <AiFillStar className="mt-0.5 text-slate-400" />4
           </p>
-          <p className="font-bold">{starsCount[3]}</p>
+          <div className="flex">
+            <p className=" mr-1">{starsCount[3]}</p>
+            <p className="font-bold">
+              ({((starsCount[3] * 100) / reviewCount).toFixed(2)} %)
+            </p>
+          </div>
         </div>
       </div>
 
@@ -72,7 +82,12 @@ const StarBreakdown = () => {
           <p className="flex">
             <AiFillStar className="mt-0.5 text-slate-400" />3{" "}
           </p>
-          <p className="font-bold">{starsCount[2]}</p>
+          <div className="flex">
+            <p className=" mr-1">{starsCount[2]}</p>
+            <p className="font-bold">
+              ({((starsCount[2] * 100) / reviewCount).toFixed(2)} %)
+            </p>
+          </div>
         </div>
       </div>
 
@@ -91,7 +106,13 @@ const StarBreakdown = () => {
           <p className="flex">
             <AiFillStar className="mt-0.5 text-slate-400" />2
           </p>
-          <p className="font-bold">{starsCount[1]}</p>
+          <div className="flex">
+            <p className="mr-1">{starsCount[1]}</p>
+            <p className="font-bold">
+              {" "}
+              ({((starsCount[1] * 100) / reviewCount).toFixed(2)} %)
+            </p>
+          </div>
         </div>
       </div>
 
@@ -110,7 +131,12 @@ const StarBreakdown = () => {
           <p className="flex">
             <AiFillStar className="mt-0.5 text-slate-400" />1
           </p>
-          <p className="font-bold">{starsCount[0]}</p>
+          <div className="flex">
+            <p className="mr-1">{starsCount[0]}</p>
+            <p className="font-bold">
+              ({((starsCount[0] * 100) / reviewCount).toFixed(2)} %)
+            </p>
+          </div>
         </div>
       </div>
     </div>
