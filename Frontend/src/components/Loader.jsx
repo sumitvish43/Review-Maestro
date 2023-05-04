@@ -37,7 +37,7 @@ const LineLoading = () => {
         />
       </div>
       <p className="flex justify-center text-sm mt-12 text-white center">
-        This will take a few minutes (estimated time 4 minutes..)
+        This will take a while ...{" "}
       </p>
     </div>
   );

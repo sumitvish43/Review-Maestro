@@ -18,7 +18,7 @@ const App = () => {
     document.getElementById("dark-overlay").style.display = "block";
     setTimeout(() => {
       setAppInput(item.target.name);
-    }, 190000);
+    }, 5000);
     setAppId(item.target.id);
   };
 

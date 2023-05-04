@@ -64,8 +64,8 @@ export const ContextProvider = ({ children }) => {
         setLoading(false);
         const arrayData = JSON.parse(reviewData);
         setReviewCount(arrayData.length);
-        const tempArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        const tempTopicPositive = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        const tempArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        const tempTopicPositive = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         arrayData.map((review) => {
           tempArray[review["topics"]] += 1;
           if (review["sentiment"] === 1)
@@ -96,7 +96,7 @@ export const ContextProvider = ({ children }) => {
         const lineChartDataTemp = [];
         var sumOfAvgRating = 0;
         for (var i = 0; i < forChart.length; i += 3) {
-          const x = forChart[i];
+          const x = new Date(forChart[i]);
           const y = forChart[i + 1] / forChart[i + 2];
           sumOfAvgRating += y;
           lineChartDataTemp.push({ x, y });
@@ -112,8 +112,10 @@ export const ContextProvider = ({ children }) => {
     "Audio",
     "Bugs",
     "Design & UX",
+    "Dissatisfied Users",
     "Feature Requests",
     "Performance", //
+    "Satisfied Users",
     "Security & Accounts",
     "Sign Up & Login",
     "Update",

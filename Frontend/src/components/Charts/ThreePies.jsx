@@ -4,8 +4,8 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Chart } from "react-google-charts";
 import { useStateContext } from "../../contexts/ContextProvider";
 
-const ThreePies = ({ topicMentions1, topicMentions2 }) => {
-  const { topicMentions, topicNames } = useStateContext();
+const ThreePies = ({ app1, app2, topicMentions1, topicMentions2 }) => {
+  const { topicMentions, topicNames, appName } = useStateContext();
   const temp = [];
   topicMentions.map((val) => {
     temp.push(val);
@@ -58,28 +58,38 @@ const ThreePies = ({ topicMentions1, topicMentions2 }) => {
   mydata2.unshift(["Topic", "No of mentions"]);
 
   return (
-    <div className="flex">
-      <Chart
-        chartType="PieChart"
-        width="33%"
-        height="200px"
-        data={mydata}
-        options={options}
-      />
-      <Chart
-        chartType="PieChart"
-        width="33%"
-        height="200px"
-        data={mydata1}
-        options={options}
-      />
-      <Chart
-        chartType="PieChart"
-        width="33%"
-        height="200px"
-        data={mydata2}
-        options={options}
-      />
+    <div className="flex justify-between mb-10">
+      <div>
+        <Chart
+          chartType="PieChart"
+          width="300px"
+          height="300px"
+          data={mydata}
+          options={options}
+        />
+        <p className="flex justify-center">{appName}</p>
+      </div>
+
+      <div>
+        <Chart
+          chartType="PieChart"
+          width="300px"
+          height="300px"
+          data={mydata1}
+          options={options}
+        />
+        <p className="flex justify-center">{app1}</p>
+      </div>
+      <div>
+        <Chart
+          chartType="PieChart"
+          width="300px"
+          height="300px"
+          data={mydata2}
+          options={options}
+        />
+        <p className="flex justify-center">{app2}</p>
+      </div>
     </div>
   );
 };

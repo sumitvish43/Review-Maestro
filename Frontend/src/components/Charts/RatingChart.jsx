@@ -15,12 +15,30 @@ import {
   RatingLineXAxis,
   RatingLineYAxis,
 } from "../../data/dummy";
+
 import { useStateContext } from "../../contexts/ContextProvider";
 
 const RatingChart = () => {
   //average and format rating data
   const { lineChartData } = useStateContext();
 
+  lineChartData.map((data) => {
+    // if (data["x"].split(" ").join("").length === 5) {
+    //   let year = data["x"].split(" ").join("").slice(0, 4);
+    //   let month = data["x"].split(" ").join("").slice(4, 6);
+    //   data["x"] = new Date(year, month);
+    //   console.log(lineChartData);
+    // }
+    // var len2 = data["x"];
+    // if (len2.replaceAll(" ", "").length === 5) {
+    //   let year = data["x"].replaceAll(" ", "").slice(0, 4);
+    //   let month = data["x"].replaceAll(" ", "").slice(4, 5);
+    //   data["x"] = new Date(year, month);
+    //   console.log(lineChartData);
+    // }
+    // console.log(typeof data["x"].replaceAll(" ", "").length);
+  });
+  console.log(lineChartData);
   //data for chart
   const ratingSeries = [
     {

@@ -141,14 +141,14 @@ def summarize_app(appName):
 def fetch_data(appName):
     review, continuation_token = reviews(
     appName, #'us.zoom.videomeetings'
-    count = 312,
+    count = 1135,
     sort=Sort.NEWEST
     )
 
     for i in range(1,10):
         result, continuation_token = reviews(
         appName, #'us.zoom.videomeetings'
-        count = 312,
+        count = 1135,
         continuation_token=continuation_token # defaults to None(load from the beginning)
         )
         review.extend(result)

@@ -163,6 +163,30 @@ const Topics = () => {
       ),
       Mentionpercent: ((topicMentions[10] / reviewCount) * 100).toFixed(2),
     },
+    {
+      TopicName: topicNames[11],
+      Mentions: topicMentions[11],
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[11]}
+          positives={positiveOnTopic[11]}
+          key={11}
+        />
+      ),
+      Mentionpercent: ((topicMentions[11] / reviewCount) * 100).toFixed(2),
+    },
+    {
+      TopicName: topicNames[12],
+      Mentions: topicMentions[12],
+      Sentiment: (
+        <LineDistribution
+          total={topicMentions[12]}
+          positives={positiveOnTopic[12]}
+          key={12}
+        />
+      ),
+      Mentionpercent: ((topicMentions[10] / reviewCount) * 100).toFixed(2),
+    },
   ];
 
   return loading ? (

@@ -287,7 +287,7 @@ export const ratingSeries = [
 ];
 export const RatingLineXAxis = {
   valueType: "DateTime",
-  labelFormat: "y",
+
   edgeLabelPlacement: "Shift",
   majorGridLines: { width: 0 },
   background: "white",

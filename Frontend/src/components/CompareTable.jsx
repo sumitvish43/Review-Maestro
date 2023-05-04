@@ -35,10 +35,10 @@ const CompareTable = () => {
   var app1Data = [];
   var app2 = "";
   var app2Data = [];
-  var topicMentions1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var topicMentions1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   var avgRating1 = 0;
   var sentiment1 = 0;
-  var topicMentions2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var topicMentions2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   var avgRating2 = 0;
   var sentiment2 = 0;
 
@@ -240,7 +240,9 @@ const CompareTable = () => {
       <Header category="Visualization of Topic Extraction" />
       <ThreePies
         topicMentions1={topicMentions1}
+        app1={app1}
         topicMentions2={topicMentions2}
+        app2={app2}
       />
     </>
   );
