@@ -92,7 +92,7 @@ const Dashboard = () => {
                   <CountUp end={reviewCount} />
                 </p>
                 <p className="text-sm underline text-slate-600 cursor-pointer">
-                  Load More
+                  reviews from Feb 2023 till today
                 </p>
               </div>
             </div>
