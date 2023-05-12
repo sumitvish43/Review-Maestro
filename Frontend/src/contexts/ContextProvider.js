@@ -24,9 +24,18 @@ export const ContextProvider = ({ children }) => {
   const [positiveOnTopic, setPositiveOnTopic] = useState([0]);
   const [avgRating, setAvgRating] = useState(0);
   const [lineChartData, setLineChartData] = useState([]);
+  const [lastMonth, setLastMonth] = useState("");
+  const [year, setYear] = useState(0);
+
   const [gmeetData, setGmeetData] = useState([{}]);
   const [zoomData, setZoomData] = useState([{}]);
   const [teamsData, setTeamsData] = useState([{}]);
+  function getMonthName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber);
+
+    return date.toLocaleString("en-US", { month: "long" });
+  }
 
   const loadAllData = () => {
     fetch(`http://localhost:5000/ms-teams-data`)
@@ -103,6 +112,11 @@ export const ContextProvider = ({ children }) => {
         }
 
         setLineChartData(lineChartDataTemp);
+        setLastMonth(
+          getMonthName(lineChartDataTemp.slice(-1)[0]["x"].getMonth())
+        );
+        setYear(lineChartDataTemp.slice(-1)[0]["x"].getFullYear());
+
         const avgRating = sumOfAvgRating / (forChart.length / 3);
         setAvgRating(Number(parseFloat(avgRating).toFixed(2)));
       });
@@ -168,6 +182,8 @@ export const ContextProvider = ({ children }) => {
         setReviewCount,
         avgRating,
         lineChartData,
+        lastMonth,
+        year,
         gmeetData,
         zoomData,
         teamsData,

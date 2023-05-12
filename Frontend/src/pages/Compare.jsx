@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { LineChart, PageLoader } from "../components";
-import { Header, CompareTable, ThreePies } from "../components";
+import React from "react";
+import { PageLoader } from "../components";
+import { Header, CompareTable } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const Compare = () => {
@@ -12,9 +12,6 @@ const Compare = () => {
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
       <Header category="App Stats" title="Compare" />
       <CompareTable />
-
-      <Header category="Review Volume" />
-      <LineChart />
     </div>
   );
 };

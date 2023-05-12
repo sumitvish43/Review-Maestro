@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import gmeet from "../data/Google Meet.jpg";
 import zoom from "../data/Zoom Meetings.jpg";
 import teams from "../data/Microsoft Teams.jpg";
@@ -16,7 +16,6 @@ const CompareTable = () => {
   const zoomColor = "#02AC49"; //"#1B97F3"
   const teamsColor = "#02AC49"; //"#5059C9"
   const {
-    currentColor,
     reviewCount,
     appName,
     avgRating,
@@ -238,6 +237,9 @@ const CompareTable = () => {
         </table>
       </div>
       <Header category="Visualization of Topic Extraction" />
+      <p className="text-lg text-slate-600 center">
+        Proportions of topics mention for each applicaton
+      </p>
       <ThreePies
         topicMentions1={topicMentions1}
         app1={app1}

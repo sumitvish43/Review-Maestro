@@ -19,10 +19,14 @@ const Dashboard = () => {
     loading,
     topicNames,
     topicMentions,
+    positiveOnTopic,
     reviewCount,
     appName,
+    lastMonth,
+    year,
     avgRating,
   } = useStateContext();
+
   const temp = [];
   topicMentions.map((val) => {
     temp.push(val);
@@ -35,6 +39,10 @@ const Dashboard = () => {
   const mydata = [];
   temp.slice(0, 5).map((num) => {
     mydata.push([topicNames[topicMentions.indexOf(num)], num]);
+  });
+
+  mydata.map((data) => {
+    data[1] -= positiveOnTopic[topicNames.indexOf(data[0])];
   });
   mydata.unshift(["Topic", "No of mentions"]);
 
@@ -92,7 +100,7 @@ const Dashboard = () => {
                   <CountUp end={reviewCount} />
                 </p>
                 <p className="text-sm underline text-slate-600 cursor-pointer">
-                  reviews from Feb 2023 till today
+                  reviews from {lastMonth} {year} till today
                 </p>
               </div>
             </div>

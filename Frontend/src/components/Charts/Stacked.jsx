@@ -45,32 +45,7 @@ const Stacked = ({ reviewData, width, height, reviewCount }) => {
     }
   });
   const positiveData = [];
-  const monthConvert = [
-    1,
-    "Jan",
-    2,
-    "Feb",
-    3,
-    "Mar",
-    4,
-    "Apr",
-    5,
-    "May",
-    6,
-    "Jun",
-    7,
-    "Jul",
-    8,
-    "Aug",
-    9,
-    "Sep",
-    10,
-    "Oct",
-    11,
-    "Nov",
-    12,
-    "Dec",
-  ];
+
   for (var i = 0; i < forChart.length; i += 3) {
     const x = forChart[i];
     const y = forChart[i + 1];
@@ -88,7 +63,7 @@ const Stacked = ({ reviewData, width, height, reviewCount }) => {
   const stackedPrimaryYAxis = {
     lineStyle: { width: 0 },
     minimum: 0,
-    maximum: reviewCount,
+    maximum: reviewCount / 1.2,
     interval: reviewCount / 5,
     majorTickLines: { width: 0 },
     majorGridLines: { width: 1 },

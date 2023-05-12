@@ -4,9 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "./pages";
 import App from "./App";
-fetch(`http://localhost:5000/background-start`).then((res) => {
-  console.log("response", res);
-});
+fetch(`http://localhost:5000/background-start`).then((res) => {});
 ReactDOM.render(
   <React.StrictMode>
     <App />
